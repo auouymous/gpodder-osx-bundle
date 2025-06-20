@@ -1,7 +1,5 @@
-commit 881d9778f91ebae028feb01a42571330fd88d2fc
+commit 60b034689933384a3b6d6a45560b64a43f442f6e
 Author: John Ralls <jralls@ceridwen.us>
-Date:   Tue May 13 09:17:34 2025 -0700
+Date:   Thu Jun 12 16:39:45 2025 -0700
 
-    Disable new gdk-pixbuf dependency glycin.
-    
-    According to glycin's README.md it is Linux-only.
+    New error suppression flags for webkit on SDK15.5.
