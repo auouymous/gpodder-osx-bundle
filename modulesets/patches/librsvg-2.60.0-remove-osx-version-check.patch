@@ -1,0 +1,12 @@
+--- a/meson.build
++++ b/meson.build
+@@ -33,8 +33,8 @@
+   # https://github.com/rust-lang/rust/pull/116319
+   ret = cc.compiles('''#include <Availability.h>
+ #include <TargetConditionals.h>
+ #if !((TARGET_OS_OSX && __MAC_OS_X_VERSION_MIN_REQUIRED >= 101200L) || (TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED >= 100000L))
+-# error "https://gitlab.gnome.org/GNOME/librsvg/-/issues/1097"
++//# error "https://gitlab.gnome.org/GNOME/librsvg/-/issues/1097"
+ #endif''',
+     name: 'Targets at least macOS 10.12 or iOS 10',
+   )
