@@ -1,5 +1,5 @@
-commit 60b034689933384a3b6d6a45560b64a43f442f6e
+commit 6216956ef73365a026b9fa7771e3077f0ea7fee6
 Author: John Ralls <jralls@ceridwen.us>
-Date:   Thu Jun 12 16:39:45 2025 -0700
+Date:   Mon Aug 4 12:24:37 2025 -0700
 
-    New error suppression flags for webkit on SDK15.5.
+    Update gcrypt, libgpg-error, and gnutls to the latest releases.

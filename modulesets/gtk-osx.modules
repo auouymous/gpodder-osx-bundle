@@ -85,8 +85,6 @@
     <branch module="glib/2.83/glib-2.83.4.tar.xz"
             version="2.83.4"
             hash="sha256:4edc4dc184f46d1220694b7775c5d7c62265c83b0e9632d844da127c181fc391" >
-      <patch file="glib-2.83.4-remove-osx-version-check.patch"
-             strip="1" />
     </branch>
     <dependencies>
       <dep package="libffi" />
@@ -343,12 +341,12 @@
             repo="download.gnome.org"/>
   </autotools>
   <meson id="librsvg"
-         mesonargs="-Dintrospection=disabled -Ddocs=disabled">
+         mesonargs="--buildtype=release -Dintrospection=disabled -Ddocs=disabled">
     <branch module="librsvg/2.60/librsvg-2.60.0.tar.xz"
             version="2.60.0"
             hash="sha256:0b6ffccdf6e70afc9876882f5d2ce9ffcf2c713cbaaf1ad90170daa752e1eec3" >
       <patch file="librsvg-libpixbufloader-install-names.patch" strip="1" />
-      <patch file="librsvg-2.60.0-remove-osx-version-check.patch" strip="1" />
+      <patch file="librsvg-fix-symbol-link-argument.patch" strip="1" />
     </branch>
     <dependencies>
       <dep package="openssl"/> <!-- Required for rust package cargo-c -->
