@@ -2,11 +2,9 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <!--
-    Please format this file using https://github.com/htacg/tidy-html5
-
-        tidy -config ../tidy.conf -m gtk-osx-random.modules
-  -->
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-random.modules; sed -i "" '/^ *$/d' gtk-osx-random.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
   <repository name="download.gnome.org"
               default="yes"
               href="https://download.gnome.org/sources/"
@@ -32,102 +30,40 @@
   <repository name="sqlite"
               href="http://www.sqlite.org/"
               type="tarball" />
-  <repository name="itstool"
-              href="http://files.itstool.org/"
-              type="tarball" />
-  <!---->
   <autotools id="graphviz"
              autogen-sh="autoreconf"
              autogenargs="--disable-sharp --disable-guile --disable-java --disable-lua --disable-ocaml --disable-perl --disable-php --disable-r --disable-ruby --disable-tcl --with-pangocairo">
-    <branch module="11.0.0/graphviz-11.0.0.tar.xz"
-            version="11.0.0"
-            hash="sha256:ae9a344748876f5c16577061e9c2a652151c90eb7572ee17c92b148c65577222"
+    <branch module="14.1.5/graphviz-14.1.5.tar.xz"
+            version="14.1.5"
+            hash="sha256:b017378835f7ca12f1a3f1db5c338d7e7af16b284b7007ad73ccec960c1b45b3"
             repo="graphviz">
-      <patch file="graphviz-11-fix-python-config.patch" strip="1" />
+      <patch file="graphviz-11-fix-python-config.patch"
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="pango" />
       <dep package="librsvg" />
     </dependencies>
   </autotools>
-  <!---->
   <autotools id="vala"
              autogen-sh="configure">
-    <branch module="vala/0.56/vala-0.56.17.tar.xz"
-            version="0.56.17"
-            hash="sha256:26100c4e4ef0049c619275f140d97cf565883d00c7543c82bcce5a426934ed6a" />
+    <branch module="vala/0.56/vala-0.56.19.tar.xz"
+            version="0.56.19"
+            hash="sha256:5ad7cbbfcc0de61b403d6797c9ef60455bfbebd8e162aec33b5b0b097adfb9d5" />
     <dependencies>
       <dep package="graphviz" />
       <dep package="meta-gtk-osx-bootstrap" />
       <dep package="meta-gtk-osx-gtk3" />
     </dependencies>
   </autotools>
-  <!---->
   <autotools id="expat"
              autogen-sh="configure">
-    <branch module="expat/expat-2.6.2.tar.xz"
-            version="2.6.2"
-            hash="sha256:ee14b4c5d8908b1bec37ad937607eab183d4d9806a08adee472c3c3121d27364"
-            repo="sourceforge" />
+    <branch module="libexpat/libexpat/releases/download/R_2_7_5/expat-2.7.5.tar.xz"
+            version="2.7.5"
+            hash="sha256:1032dfef4ff17f70464827daa28369b20f6584d108bc36f17ab1676e1edd2f91"
+            repo="github-tarball" />
   </autotools>
-  <!---->
-  <meson id="amtk">
-    <branch module="amtk/5.6/amtk-5.6.1.tar.xz"
-            version="5.6.1"
-            hash="sha256:d50115b85c872aac296934b5ee726a3fa156c6f5ad96d27e0edd0aa5ad173228">
-    </branch>
-    <dependencies>
-      <dep package="gtk+-3.0" />
-    </dependencies>
-  </meson>
-  <!---->
-  <autotools id="itstool"
-             autogen-sh="configure">
-    <branch module="itstool/itstool-2.0.7.tar.bz2"
-            version="2.0.7"
-            hash="sha256:6b9a7cd29a12bb95598f5750e8763cee78836a1a207f85b74d8b3275b27e87ca"
-            repo="itstool">
-    </branch>
-    <dependencies>
-      <dep package="libxml2" />
-    </dependencies>
-  </autotools>
-  <!---->
-  <meson id="devhelp-gtk3">
-    <branch module="devhelp/43/devhelp-43.0.tar.xz"
-            version="43.0"
-            hash="sha256:63ceeefd05392e02044881ef1ecd724293553da5735b7efc082b2d13fe85dd04">
-
-      <patch file="devhelp-3-build-on-macOS.patch"
-             strip="1" />
-    </branch>
-    <dependencies>
-      <dep package="webkit2gtk3" />
-      <dep package="amtk" />
-      <dep package="gsettings-desktop-schemas" />
-      <!--
-        Without shared-mime-info, HTML documents display as plain text
-      -->
-      <dep package="shared-mime-info" />
-      <dep package="itstool" />
-    </dependencies>
-  </meson>
-  <!---->
-  <meson id="glade"
-         mesonargs="-Dmac_bundle=true -Dman=false">
-    <branch module="glade/3.40/glade-3.40.0.tar.xz"
-            version="3.40.0"
-            hash="sha256:31c9adaea849972ab9517b564e19ac19977ca97758b109edc3167008f53e3d9c">
-    </branch>
-    <dependencies>
-      <dep package="itstool" />
-      <dep package="meta-gtk-osx-gtk3" />
-    </dependencies>
-  </meson>
-  <!--
-    gtksourceview got a major version ahead:
-    4.x.x supports recent versions of gtk+-3 and 5.x.x is for gtk4.
-  -->
+  <!-- GtkSourceView 4.8.4 is the last release for Gtk3 -->
   <meson id="gtksourceview3"
          mesonargs="-Dvapi=false">
     <branch module="gtksourceview/4.8/gtksourceview-4.8.4.tar.xz"
@@ -138,19 +74,18 @@
       <dep package="gtk+-3.0" />
     </dependencies>
   </meson>
-  <!---->
-  <meson id="gtksourceview4"
-         mesonargs="-Dintrospection=disabled">
-    <branch module="gtksourceview/5.12/gtksourceview-5.12.1.tar.xz"
-            version="5.12.1"
-            hash="sha256:84c82aad985c5aadae7cea7804904a76341ec82b268d46594c1a478f39b42c1f">
+  <meson id="gtksourceview4" >
+    <branch module="gtksourceview/5.20/gtksourceview-5.20.0.tar.xz"
+            version="5.20.0"
+            hash="sha256:e38bcd23f52b86eadf0fe4d8bde698e3a8ca102322b8b4cf1a51ac294a448c1b">
     </branch>
     <dependencies>
       <dep package="gtk-4" />
       <dep package="libpcre2" />
+      <dep package="vala"/>
     </dependencies>
   </meson>
-  <!---->
+  <!-- 2026-04-14: shared-mime-info last release was 2.4 in 2022. There have been hundreds of commits sense, but this still seems to work OK. -->
   <meson id="shared-mime-info">
     <branch module="2.4/shared-mime-info-2.4.tar.bz2"
             version="2.4"
@@ -160,50 +95,31 @@
       <dep package="glib" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="gsettings-desktop-schemas">
-    <branch module="gsettings-desktop-schemas/46/gsettings-desktop-schemas-46.0.tar.xz"
-            version="46.0"
-            hash="sha256:493a46a1161b6388d57aa72f632a79ce96c42d5ffbd1d0b00f496ec5876f8575" />
+    <branch module="gsettings-desktop-schemas/50/gsettings-desktop-schemas-50.0.tar.xz"
+            version="50.0"
+            hash="sha256:358f07cb253727650e132805df3c69f7bf90448040bce171b6f6f2cb1b9c37ef" />
     <dependencies>
       <dep package="gobject-introspection" />
     </dependencies>
   </meson>
   <!-- SQLite3 is also available from the macOS SDK -->
-  https://www.sqlite.org/
   <autotools id="sqlite"
              autogen-sh="configure"
-             autogenargs="--disable-tcl --enable-threadsafe">
-    <branch module="2024/sqlite-autoconf-3460000.tar.gz"
-            version='3.46.0'
-            hash="sha256:6f8e6a7b335273748816f9b3b62bbdc372a889de8782d7f048c653a447417a7d"
-            repo="sqlite" />
+             autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s">
+    <branch module="2026/sqlite-autoconf-3530000.tar.gz"
+            version="3.53.0"
+            hash="sha256:851e9b38192fe2ceaa65e0baa665e7fa06230c3d9bd1a6a9662d02380d73365a"
+            repo="sqlite" >
+      <patch file="sqlite3-install-name.patch" strip="1" />
+    </branch>
+    <dependencies>
+      <dep package="readline" />
+      <dep package="openssl" />
+      <dep package="zlib" />
+    </dependencies>
   </autotools>
-  <!--
-    Goocanvas2 is for gtk+-3.
-  -->
-  <autotools id="goocanvas2"
-             supports-non-srcdir-builds="no">
-    <branch module="goocanvas/2.0/goocanvas-2.0.4.tar.xz"
-            version="2.0.4"
-            hash="sha256:c728e2b7d4425ae81b54e1e07a3d3c8a4bd6377a63cffa43006045bceaa92e90" />
-    <after>
-      <dep package="gtk+-3.0" />
-    </after>
-  </autotools>
-  <!--
-    Goocanvas3 is for gtk-4.
-  -->
-  <autotools id="goocanvas3"
-             supports-non-srcdir-builds="no">
-    <branch module="goocanvas/3.0/goocanvas-3.0.0.tar.xz"
-            version="3.0.0"
-            hash="sha256:670a7557fe185c2703a14a07506156eceb7cea3b4bf75076a573f34ac52b401a" />
-    <after>
-      <dep package="gtk-4" />
-    </after>
-  </autotools>
-  <!---->
+<!-- 2026-04-14: Despite being actively maintained this is the last release, from 2022-12-09.-->
   <autotools id="hunspell"
              autogen-sh="autoreconf">
     <branch module="hunspell/hunspell/archive/v1.7.2.tar.gz"
@@ -213,13 +129,12 @@
             rename-tarball="hunspell-1.7.2.tar.gz"
             repo="github-tarball" />
   </autotools>
-  <!---->
   <autotools id="enchant"
              autogen-sh="configure"
              autogenargs="--enable-relocatable">
-    <branch module="AbiWord/enchant/releases/download/v2.8.0/enchant-2.8.0.tar.gz"
-            version="2.8.0"
-            hash="sha256:c57add422237b8a7eed116a9a88d8be4f7b9281778fa36f03e1f2c051ecb0372"
+    <branch module="rrthomas/enchant/releases/download/v2.8.15/enchant-2.8.15.tar.gz"
+            version="2.8.15"
+            hash="sha256:d3fd9e4170bfb5110b0bda577fe764a38fb606b3c25d2f0c3840234521ff1252"
             repo="github-tarball" />
     <dependencies>
       <dep package="glib" />
@@ -228,69 +143,44 @@
       <dep package="hunspell" />
     </after>
   </autotools>
-  <!---->
-  <autotools id="gtkspell3"
-             autogen-sh="configure"
-             autogenargs="--enable-vala=no">
-    <branch module="gtkspell/gtkspell3-3.0.10.tar.xz"
-            version="3.0.10"
-            hash="sha256:b040f63836b347eb344f5542443dc254621805072f7141d49c067ecb5a375732"
-            repo="sourceforge">
-      <patch file="0001-Enable-use-of-XDG_DATA_DIRS-for-locating-iso-code-fi.patch"
-             strip="1" />
-      <patch file="gtkspell-3-install.sh-wrong-sh-path.patch"
-             strip="1" />
+  <meson id="gspell"
+        mesonargs="-Dvapi=false -Dgtk_doc=false -Dtests=false -Dinstall_tests=false" >
+    <branch module="gspell/1.14/gspell-1.14.3.tar.xz"
+            version="1.14.3"
+            hash="sha256:e8b39c67556f75495362952f81ca241b5a3c17c75960b77fc93fa702c612a5a4" >
+      <patch file="gspell-1.14-enchant-resource-path.patch" strip="1" />
     </branch>
     <dependencies>
       <dep package="enchant" />
-      <dep package="iso-codes" />
+      <dep package="gtk+-3.0" />
+      <dep package='icu' />
     </dependencies>
-  </autotools>
-  <!---->
+  </meson>
+  <!-- 2026-04-14: This is the last release, from 2023-08-03. There are about 70 commits since on the master branch. -->
   <autotools id="gmp">
     <branch module="gmp/gmp-6.3.0.tar.bz2"
             version="6.3.0"
             hash="sha256:ac28211a7cfb609bae2e2c8d6058d66c8fe96434f740cf6fe2e47b000d1c20cb"
-            repo="ftp.gnu.org">
-    </branch>
-  </autotools>
-  <!---->
-  <autotools id='readline'
-             autogen-sh="configure">
-    <branch module="readline/readline-8.2.tar.gz"
-            version="8.2"
-            hash="sha256:3feb7171f16a84ee82ca18a36d7b9be109a52c04f492a053331d7d1095007c35"
             repo="ftp.gnu.org" />
   </autotools>
-  <!--iso-codes last released a tarball for version 4.1 in 2019-->
-  <autotools id="iso-codes"
+  <autotools id="readline"
              autogen-sh="configure">
+    <branch module="readline/readline-8.3.tar.gz"
+            version="8.3"
+
+            repo="ftp.gnu.org" />
+  </autotools>
+  <!-- iso-codes last released a tarball for version 4.1 in 2019 -->
+  <meson id="iso-codes">
     <branch module="iso-codes"
-            revision="v4.16.0"
-            repo="iso-codes" />
-  </autotools>
-  <!---->
-  <autotools id="libxml2"
-             autogen-sh="autoreconf"
-             autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
-             
-    <branch module="libxml2/2.11/libxml2-2.11.5.tar.xz"
-            version="2.11.5"
-            hash="sha256:3727b078c360ec69fa869de14bd6f75d7ee8d36987b071e6928d4720a28df3a6">
-       <patch file="libxml2-python-config.patch"
-             strip="1" />
-    </branch>
-    <after>
-      <dep package="python3" />
-    </after>
-  </autotools>
-  <!---->
+            repo="iso-codes"
+            revision="v4.20.1" />
+  </meson>
   <autotools id="libxslt"
              autogen-sh="autoreconf">
-    <branch module="libxslt/1.1/libxslt-1.1.39.tar.xz"
-            version="1.1.39"
-            hash="sha256:2a20ad621148339b0759c4d4e96719362dee64c9a096dbba625ba053846349f0">
-
+    <branch module="libxslt/1.1/libxslt-1.1.45.tar.xz"
+            version="1.1.45"
+            hash="sha256:9acfe68419c4d06a45c550321b3212762d92f41465062ca4ea19e632ee5d216e">
       <patch file="libxslt-python-config.patch"
              strip="1" />
     </branch>
@@ -298,5 +188,4 @@
       <dep package="libxml2" />
     </dependencies>
   </autotools>
-  <!---->
 </moduleset>

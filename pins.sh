@@ -1,7 +1,7 @@
 # https://gitlab.gnome.org/GNOME/gtk-osx/-/commits/master
-# use latest commit (2024-07-24)
-PIN_GTK_OSX_COMMIT='b0864c09'
+# use latest commit (2026-10-10)
+PIN_GTK_OSX_COMMIT='857ad1d7'
 
 # https://gitlab.gnome.org/GNOME/gtk-mac-bundler/-/commits/master
-# use latest commit (2024-05-19)
-PIN_GTK_MAC_BUNDLER_COMMIT='90443a1d'
+# use latest commit (2026-07-10)
+PIN_GTK_MAC_BUNDLER_COMMIT='fbc6ffd1'

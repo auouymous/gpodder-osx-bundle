@@ -11,4 +11,4 @@ rsync -vrb --delete _gtk-osx-modules/patches modulesets/
 rm -Rf _gtk-osx-modules
 
 # Disable check for brotli when building freetype
-(cd modulesets && patch -p1 < ../github-brotli.patch)
+(cd modulesets && patch --dry-run -p1 < ../github-brotli.patch && patch -p1 < ../github-brotli.patch)

@@ -1,5 +1,5 @@
-commit b0864c09e715b4964b6fb1f8228e9c939f3545d0
-Author: Fabian Wüthrich <me@fabwu.ch>
-Date:   Fri Jul 19 23:27:52 2024 +0000
+commit 857ad1d7d6fc9b93d630782205f6fb2a74b62dc3
+Author: John Ralls <jralls@ceridwen.us>
+Date:   Thu Sep 24 13:30:23 2026 -0700
 
-    Add install instructions to README
+    Patch out quartz window-focus hacks.
