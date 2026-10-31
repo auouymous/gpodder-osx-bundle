@@ -1,0 +1,13 @@
+--- a/meson.build
++++ b/meson.build
+@@ -995,8 +995,8 @@
+   add_languages('objc', native: false, required: true)
+   objcc = meson.get_compiler('objc')
+   if not objcc.compiles('''#include <AvailabilityMacros.h>
+                            #if MAC_OS_X_VERSION_MIN_REQUIRED < 101300
+-                           #error message "GLib requires macOS 10.13 or later."
++                           // #error message "GLib requires macOS 10.13 or later."
+                            #endif''',
+                          name : 'macOS 10.13 or later')
+     error('GLib requires macOS 10.13 or later.')
+
